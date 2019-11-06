@@ -310,12 +310,15 @@ public class accessApi {	//API에 접속해 정보를 추출하는 메소드의 집합 클래스
             XPath xpath = xpathFactory.newXPath();
             XPathExpression expr = xpath.compile("//items/item");
             NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-            for(int i=0; i<1;i++) {
+            for(int i=0; i<nodeList.getLength();i++) {
             	NodeList child = nodeList.item(i).getChildNodes();
             	for(int j=0; j<child.getLength(); j++) {
             		Node node = child.item(j);
             		if(node.getNodeName()=="dataTime") {
-            			buffer = "&nbsp;&nbsp;통보 시간 : " + node.getTextContent() + "<br>";
+            			buffer = buffer + "&nbsp;&nbsp;통보 시간 : " + node.getTextContent() + "<br>";
+            		}
+            		else if(node.getNodeName()=="informOverall") {
+            			buffer = buffer + "&nbsp;&nbsp;예보 요약 : " + node.getTextContent() + "<br>";
             		}
             		else if(node.getNodeName()=="informCode") {
             			buffer = buffer + "&nbsp;&nbsp;통보 코드 : " + node.getTextContent() + "<br>";
@@ -327,6 +330,7 @@ public class accessApi {	//API에 접속해 정보를 추출하는 메소드의 집합 클래스
             			buffer = buffer + "&nbsp;&nbsp;예보 통보 시간 : " + node.getTextContent() + "<br>";
             		}
             	}
+            	buffer = buffer + "<br>";
             }            
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -340,7 +344,7 @@ public class accessApi {	//API에 접속해 정보를 추출하는 메소드의 집합 클래스
 		String buffer = null;	//대기오염정보 저장
 		
 		String requestUrl = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureLIst?"
-				+ "itemCode=PM10&dataGubun=DAILY&searchCondition=MONTH&pageNo=1&numOfRows=10&ServiceKey=" + apiKey;
+				+ "itemCode=PM10&dataGubun=HOUR&searchCondition=MONTH&pageNo=1&numOfRows=20&ServiceKey=" + apiKey;
 		
 		BufferedReader br = null;
         //DocumentBuilderFactory 생성
@@ -369,17 +373,18 @@ public class accessApi {	//API에 접속해 정보를 추출하는 메소드의 집합 클래스
             XPath xpath = xpathFactory.newXPath();
             XPathExpression expr = xpath.compile("//items/item");
             NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-            for(int i=0; i<1;i++) {
+            for(int i=0; i<nodeList.getLength();i++) {
             	NodeList child = nodeList.item(i).getChildNodes();
             	for(int j=0; j<child.getLength(); j++) {
             		Node node = child.item(j);
             		if(node.getNodeName()=="dataTime") {
-            			buffer = "&nbsp;&nbsp;통보 시간 : " + node.getTextContent() + "<br>";
+            			buffer = buffer + "&nbsp;&nbsp;통보 시간 : " + node.getTextContent() + "<br>";
             		}
             		else if(node.getNodeName()=="seoul") {
             			buffer = buffer + "&nbsp;&nbsp;서울 : " + node.getTextContent() + "<br>";
             		}
             	}
+            	buffer = buffer + "<br>";
             }            
         } catch (Exception e) {
             System.out.println(e.getMessage());
