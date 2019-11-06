@@ -77,8 +77,10 @@
 		
 		recentRoc = recentRoc.substring(0, recentRoc.lastIndexOf(" "));	//지번주소의 번지를 제외한 나머지 주소 ex)경기도 의왛시 월암동 22-1 -> 경기도 의왕시 월암동
 			
-		String place = recentRoc.substring(0, 2);
+		String place = recentRoc.substring(0, recentRoc.indexOf(" "));
 		out.println("&nbsp;&nbsp;"+place + "<br>");	//현위치 지번주소를 출력
+		String area = api.area2English(place);
+		out.println("&nbsp;&nbsp;"+area + "<br>");	//현위치 지번주소를 출력
 		
 		tmX = api.addr2TmRoc(recentRoc);	//현위치 지번주소(경기도 의왕시 월암동) -> 해당주소 기준 tm좌표   로 변경(반환값은 "tmX tmY"문자열)
 		tmY = tmX.substring(tmX.lastIndexOf(" "));	//합쳐진 tmX tmY 문자열을 나누어 저장
@@ -93,9 +95,6 @@
 		
 		 
 		out.println(date);
-		
-		
-		
 		
 	%> 
 	<form action="start.jsp" method="get">	
