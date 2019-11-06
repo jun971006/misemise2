@@ -380,8 +380,8 @@ public class accessApi {	//API에 접속해 정보를 추출하는 메소드의 집합 클래스
             		if(node.getNodeName()=="dataTime") {
             			buffer = buffer + "&nbsp;&nbsp;통보 시간 : " + node.getTextContent() + "<br>";
             		}
-            		else if(node.getNodeName()=="seoul") {
-            			buffer = buffer + "&nbsp;&nbsp;서울 : " + node.getTextContent() + "<br>";
+            		else if(node.getNodeName()=="gwangju") {
+            			buffer = buffer + "&nbsp;&nbsp; : " + node.getTextContent() + "<br>";
             		}
             	}
             	buffer = buffer + "<br>";
@@ -392,5 +392,48 @@ public class accessApi {	//API에 접속해 정보를 추출하는 메소드의 집합 클래스
 		
 
 		return buffer;
+	}
+	
+	public String area2English(String place) throws UnsupportedEncodingException {
+		//place = URLEncoder.encode(place, "UTF-8");
+		String EngArea = null;
+		if(place=="서울특별시") {
+			EngArea="seoul";
+		}else if(place=="경기도") {
+			EngArea="gyeonggi";
+		}else if(place=="부산광역시") {
+			EngArea="busan";
+		}else if(place=="울산광역시") {
+			EngArea="ulsan";
+		}else if(place=="대구광역시") {
+			EngArea="daegu";
+		}else if(place=="강원도") {
+			EngArea="gangwon";
+		}else if(place=="제주도") {
+			EngArea="jeju";
+		}else if(place=="세종특별자치시") {
+			EngArea="sejong";
+		}else if(place=="전라남도") {
+			EngArea="jeonam";
+		}else if(place=="전라북도") {
+			EngArea="jeonbuk";
+		}else if(place=="경상남도") {
+			EngArea="gyeongnam";
+		}else if(place=="경상북도") {
+			EngArea="gyeongbuk";
+		}else if(place=="충청남도") {
+			EngArea="chungnam";
+		}else if(place=="충청북도") {
+			EngArea="chungbuk";
+		}else if(place=="대전광역시") {
+			EngArea="daejeon";
+		}else if(place=="광주광역시") {
+			EngArea="gwangju";
+		}else if(place=="인천광역시") {
+			EngArea="incheon";
+		}
+		
+		
+		return EngArea;
 	}
 }
